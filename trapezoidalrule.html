@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Trapezoidal Rule</title>
+    <link rel="shortcut icon" href="#" />
+</head>
+<body>
+    <form id="TrapezoidalValues">
+        <div class="formBox">
+            <label for="title">Enter the function</label>
+            <input type="text" id="Fn" placeholder="F(x)" pattern="[0-9xX\*\+\(\)\/\.\^\-]." title="please enter a proper equation"  required />
+        </div> <!-- makes an input text field. the user will enter Fn = function to solve here-->
+        <br />   <!-- adds a line break. بيسيب سطر-->
+
+        <div class="formBox">
+            <label for="title">Enter the Upper Bound</label>
+            <input type="number" id="UpBound" placeholder="0" required />
+        </div>  <!--input text field, the user will enter the UpBound = upper bound for the interval-->
+        <br />
+
+        <div class="formBox">
+            <label for="title">Enter the Lower Bound</label>
+            <input type="number" id="LowBound" placeholder="0" required />
+        </div>  <!--input text field asking for LowBound = lower bound of the interval-->
+        <br />
+
+        <div class="formBox">
+            <label for="title">Enter the no. if intervals</label>
+            <input type="number" min="1" id="Interval" placeholder="0" required />
+        </div> <!--input text field for n= number of intervals-->
+        <br />
+
+        <div class="formBox">
+            <button type="submit" id="evaluate" onclick="Trapezoidal();">Evaluate</button>
+        </div>   <!-- creates a button, when the user presses it, it solves the equation-->
+
+    </form>
+    <script>
+
+        function Trapezoidal() {
+
+            let Fx = document.getElementById('Fn').value
+            let Up = document.getElementById('UpBound').value
+            let Low = document.getElementById('LowBound').value
+            let IN = document.getElementById('Interval').value
+
+            if (Up < Low) {
+                alert("Upper bound cannot be smaller than lower bound")
+                return -1;
+            }
+
+            else {
+                let n = 1*((Up - Low) / IN);
+                n = n.toFixed(4)
+                let Sum = 1*(eval(Fx, x = Up) + eval(Fx, x = Low));
+
+                let j = 1 * (Low + n);
+                for (let i = 1; i <IN; i++) {
+                    j += (1 * n * i);
+                    Sum += 1*((n / 2) * 2 * eval(Fx, x = j));
+                    console.log('j is ', j)
+                    console.log('sum is ', Sum)
+                }
+                Sum = Sum.toFixed(4);
+                document.write('The area is approximately ', Sum);
+                 
+            }
+            return -1; 
+        }
+    </script>
+</body>
+</html>
